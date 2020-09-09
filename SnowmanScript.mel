@@ -1,0 +1,57 @@
+{
+    string $allObjs[] = {};
+    string $tempObj[] = {};
+    
+    $tempObj = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    
+    $tempObj = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+    move -r 0 1 0;
+    scale -r .70 .70 .70;
+    select -r pSphere2.f[219];
+    polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 0.6622 -pvy 1.16 -pvz -0.106 -divisions 1 -twist 0 - taper 1 -off 0 -thickness 0 -smoothingAngle 30 pSphere2.f[219];
+    setAttr "polyExtrudeFace1.localTranslate" -type double3 0 0 1.5;
+    select -r pSphere2.f[209];
+    polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.6622 -pvy 1.16 -pvz -0.106 -divisions 1 -twist 0 - taper 1 -off 0 -thickness 0 -smoothingAngle 30 pSphere2.f[209];
+    setAttr "polyExtrudeFace2.localTranslate" -type double3 0 0 1.5;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    
+    $tempObj = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+    move -r 0 1.9 0;
+    scale -r .5 .5 .5;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    $tempObj = `polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1`;
+    scale -r 1 0.077 1;
+    scale -r 0.494 0.494 0.494;
+    move -r 0 2.2782 0;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    
+    $tempObj = `polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1`;
+    move -r 0 1.9 0;
+    scale -r .5 .5 .5;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    $tempObj = `polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1`;
+    scale -r 0.4009 0.4009 0.4009;
+    move -r 0 2.68888 0;
+    $allObjs[size($allObjs)] = $tempObj[0];
+    
+    
+    
+    
+    
+    polyUnite $allObjs;
+    rename polySurface1"SnowmanGeo"; 
+    
+    group -empty -name "SnowmanGroup";
+    
+    if(objExists ("SnowmanGroup"))
+    {
+        select -r "SnowmanGeo" "SnowmanGroup";
+        parent;
+    }
+    
+    
+    
+    
+    
+}
