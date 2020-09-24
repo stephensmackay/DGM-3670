@@ -1,0 +1,150 @@
+proc float Sub(float $num[])
+{
+    float $result = $num[0];
+    for ($j = 1; $j < size($num); $j++)
+    {
+        $result -= $num[$j];
+    }
+    return $result;
+}
+
+Sub({10,3,2});
+
+proc float Mult(float $num[])
+{
+    float $result = 1;
+    for ($j = 0; $j < size($num); $j++)
+    {
+        $result *= $num[$j];
+    }
+    return $result;
+}
+
+Mult({3,3,3});
+
+proc float Divide(float $num[])
+{
+    float $result = $num[0];
+    for ($j = 1; $j < size($num); $j++)
+    {
+        $result /= $num[$j];
+    }
+    return 
+$result;
+}
+
+Divide({10,2});
+
+proc float addition(float $num[])
+{
+ float $sum = 0;
+ 
+ for ($i = 0; $i < size($num); $i++)
+ {
+      $sum += $num[$i];
+ }   
+ 
+ 
+ return $sum;   
+}
+
+addition({3,3,3});
+
+proc float Mean(float $num[])
+{
+ float $sum = 0;
+ float $average;
+ 
+ for ($i = 0; $i < size($num); $i++)
+ {
+      $sum += $num[$i];
+ }   
+ 
+ $average = ($sum / size($num));
+ 
+ return $average;   
+}
+
+Mean({11,9,10});
+
+proc float Power(float $num1, int $num2)
+{
+    float $result = $num1;
+    for ($i = 1; $i < $num2; $i++)
+    {
+        $result *= $num1;
+    }
+    
+    return $result;
+}
+
+Power(10,2);
+
+proc float mode(float $num[])
+{
+    float $modeValue; //value to return
+    float $countArray[] = {}; //new array to evaluate what is the highest frequency number
+    int $countNum = 0; //running total of how often it occurs
+    for ($i = 0; $i < size($num); $i++) //this for loop should take the each element in the array and count how often the number occurs
+    {
+        int $currentIndex = $i; 
+        for ($k = 0; $k <size($num); $k++) //nested loop that does the counting by comparing the current element to each number in the entire array
+        {
+         
+            if ($num[$currentIndex] == $num[$k])
+            {
+                $countNum++;
+            }
+
+        }
+        $countArray[$i] = $countNum; //after counting how often the number appears in the array it creates a new array that parrallels the current array and counts how often each number occurs
+        $countNum = 0;
+    }
+    print $countArray;
+     //this next section uses the new array to figure out what the index location of the highest occuring number is. (This does not take into account the possibility of mulptiple mode values
+    int $highestValue = 0;
+    int $valueLocation;
+    
+    for ($j = 0; $j < size($countArray); $j++) //this loop goes through countArray and if the current element in countArray is larger than the highest value variable, it overwrites the variable then assigns the value location
+    {
+        if($countArray[$j] > $highestValue)
+        {
+            $highestValue = $countArray[$j];
+            $valueLocation = $j;
+        }
+    }
+    
+    $modeValue = $num[$valueLocation]; //uses the value location from the above for loop to determine which number in the num array is the mode
+    
+    return $modeValue;
+    
+    
+}
+
+mode({1,1,3,3,3,3,2,6,6,1,1,1,1});
+
+proc float median(float $num[])
+{
+    float $medianValue = 0;
+    int $numSize = size($num);
+    float $evenIndex1, $evenIndex2;    
+    $num = `sort($num)`;
+    print $num;
+    
+    if (size($num) % 2 == 0)
+    {
+        $evenIndex1 = $num[$numSize/2];
+        $evenIndex2 = $num[$numSize/2-1];
+        $medianValue = ($evenIndex1 + $evenIndex2) / 2; 
+    }
+    else
+    {
+        $medianValue = $num[$numSize/2];
+    }
+    
+  
+    
+    return $medianValue;
+}
+
+median({1,6,5,3,3});
