@@ -1,1 +1,23 @@
-// Error: line 9: setAttr: No object matches name: item.overrideEnabled // 
+proc ChangeColor(int $color)
+{
+
+string $itemArray[];
+$itemArray = `ls - sl`;
+
+
+for ($item in $itemArray)
+    {
+    setAttr ($item + ".overrideEnabled") 1;
+    string $shapeNode[] =  `listRelatives -s $itemArray`;
+    for ($shape in $shapeNode)
+        {
+        setAttr ($shape + ".overrideEnabled")1;
+        setAttr ($shape + ".overrideColor") ($color);
+        }
+    }
+
+
+
+}
+
+ChangeColor(6);
