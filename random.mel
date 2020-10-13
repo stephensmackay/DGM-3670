@@ -1,0 +1,25 @@
+proc DuplicateAndRandomlyScatter(int $numDuplicates, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+   string $selectionArray[] = {};
+   $selectionArray = `ls - sl`;
+   
+   for  ($j = 0; $j < size($selectionArray); $j++)
+   {
+       int $index = $j;
+       
+       for($i = 0; $i < $numDuplicates; $i++)
+       {
+           
+           string $tempObj[] = {};
+           $tempObj = `duplicate -rr $selectionArray[$index]`;
+           float $xRandom = `rand $minX $maxX`;
+           float $yRandom = `rand $minY $maxY`;
+           float $zRandom = `rand $minZ $maxZ`;
+                  
+           select $tempObj;                      
+           xform -ws -translation $xRandom $yRandom $zRandom;
+       }
+   }
+}
+
+DuplicateAndRandomlyScatter(4,-10,10,-5,5,-15,15)
