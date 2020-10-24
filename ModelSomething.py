@@ -18,3 +18,6 @@ cmds.select("bulb.vtx[8:15]")
 
 cmds.scale(1.2,1,1.2)
 
+cmds.select("bulb")
+
+cmds.rotate(0,25,25, "bulb")
